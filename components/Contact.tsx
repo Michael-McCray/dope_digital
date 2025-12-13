@@ -75,7 +75,7 @@ export default function Contact() {
       id="contact"
       className="py-20 bg-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Get In Touch
@@ -86,7 +86,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <form
             onSubmit={handleSubmit}
             className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-2xl shadow-xl border border-primary-100"
@@ -175,7 +175,7 @@ export default function Contact() {
                 📧
               </div>
               <div className="text-gray-700 font-medium">Email</div>
-              <div className="text-gray-600">dopedigitalstudio@gmail.com</div>
+              <div className="text-gray-600 break-all ">dopedigitalstudio@gmail.com</div>
             </div>
             <div className="p-6 bg-primary-50 rounded-xl">
               <div className="text-2xl font-bold text-primary-600 mb-2">
@@ -189,7 +189,7 @@ export default function Contact() {
                 🕒
               </div>
               <div className="text-gray-700 font-medium">Hours</div>
-              <div className="text-gray-600">Mon-Fri 9AM-6PM</div>
+              <div className="text-gray-600">Mon-Fri 9AM-10PM</div>
             </div>
           </div>
         </div>
