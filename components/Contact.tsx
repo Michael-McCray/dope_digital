@@ -175,14 +175,14 @@ export default function Contact() {
                 📧
               </div>
               <div className="text-gray-700 font-medium">Email</div>
-              <div className="text-gray-600">hello@dopedigital.com</div>
+              <div className="text-gray-600">dopedigitalstudio@gmail.com</div>
             </div>
             <div className="p-6 bg-primary-50 rounded-xl">
               <div className="text-2xl font-bold text-primary-600 mb-2">
                 📱
               </div>
               <div className="text-gray-700 font-medium">Phone</div>
-              <div className="text-gray-600">+1 (555) 123-4567</div>
+              <div className="text-gray-600">+1 (646) 309-4008</div>
             </div>
             <div className="p-6 bg-primary-50 rounded-xl">
               <div className="text-2xl font-bold text-primary-600 mb-2">
