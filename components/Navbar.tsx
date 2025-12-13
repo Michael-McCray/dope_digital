@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <a
-                href="#home"
+                href="/#home"
                 className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Home
@@ -62,13 +62,13 @@ export default function Navbar() {
                 Services
               </a>
               <a
-                href="#about"
+                href="/#about"
                 className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
               >
                 About
               </a>
               <a
-                href="#contact"
+                href="/#contact"
                 className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
               >
                 Contact
@@ -125,28 +125,28 @@ export default function Navbar() {
         >
           <div className="px-2 pt-2 pb-4 space-y-1 bg-white/95 backdrop-blur-sm border-t border-gray-200">
             <a
-              href="#home"
+              href="/#home"
               onClick={closeMobileMenu}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors"
             >
               Home
             </a>
             <a
-              href="#services"
+              href="/#services"
               onClick={closeMobileMenu}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors"
             >
               Services
             </a>
             <a
-              href="#about"
+              href="/#about"
               onClick={closeMobileMenu}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors"
             >
               About
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               onClick={closeMobileMenu}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors"
             >
