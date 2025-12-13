@@ -115,6 +115,39 @@ The contact form uses Resend to send emails. You need to set up a Resend API key
 
 **Note:** All contact form submissions will be sent to `macoovae@gmail.com` (configured in the API route).
 
+#### Google reCAPTCHA Setup (Required for Contact Form)
+
+The contact form uses Google reCAPTCHA v2 to prevent spam. You need to set up reCAPTCHA keys:
+
+1. **Get reCAPTCHA Keys:**
+   - Go to [Google reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin/create)
+   - Click "Create" to register a new site
+   - Choose **reCAPTCHA v2** → **"I'm not a robot" Checkbox**
+   - Add your domain (e.g., `yourdomain.com` and `localhost` for development)
+   - Accept the terms and submit
+   - You'll receive two keys:
+     - **Site Key** (public, used in frontend)
+     - **Secret Key** (private, used in backend)
+
+2. **Set up environment variables:**
+
+   **For local development:**
+   - Add to `.env.local`:
+   ```
+   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_site_key_here
+   RECAPTCHA_SECRET_KEY=your_secret_key_here
+   ```
+
+   **For Vercel deployment:**
+   - Go to your project settings in Vercel
+   - Navigate to Environment Variables
+   - Add both:
+     - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` with your site key
+     - `RECAPTCHA_SECRET_KEY` with your secret key
+   - Redeploy your application
+
+**Note:** Make sure to add `localhost` to your reCAPTCHA allowed domains for local testing.
+
 #### SEO Configuration
 
 For optimal SEO, set up the following environment variables:

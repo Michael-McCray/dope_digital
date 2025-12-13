@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,15 +10,31 @@ export default function Contact() {
     message: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null
     message: string
   }>({ type: null, message: '' })
 
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus({ type: null, message: '' })
+
+    // Check if reCAPTCHA is completed
+    if (!recaptchaToken) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please complete the reCAPTCHA verification.',
+      })
+      setIsSubmitting(false)
+      return
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -25,7 +42,10 @@ export default function Contact() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken,
+        }),
       })
 
       // Check if response is JSON
@@ -47,6 +67,11 @@ export default function Contact() {
         message: 'Thank you for your message! We will get back to you soon.',
       })
       setFormData({ name: '', email: '', message: '' })
+      setRecaptchaToken(null)
+      // Reset reCAPTCHA
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset()
+      }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus({
@@ -56,6 +81,11 @@ export default function Contact() {
             ? error.message
             : 'Something went wrong. Please try again later.',
       })
+      // Reset reCAPTCHA on error
+      setRecaptchaToken(null)
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset()
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -160,9 +190,18 @@ export default function Contact() {
               </div>
             )}
 
+            <div className="mb-6 flex justify-center">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                onChange={handleRecaptchaChange}
+                theme="light"
+              />
+            </div>
+
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !recaptchaToken}
               className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}

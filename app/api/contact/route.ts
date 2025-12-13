@@ -18,12 +18,51 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json()
-    const { name, email, message } = body
+    const { name, email, message, recaptchaToken } = body
 
     // Validate input
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'All fields are required' },
+        { status: 400 }
+      )
+    }
+
+    // Verify reCAPTCHA token
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification is required' },
+        { status: 400 }
+      )
+    }
+
+    // Verify reCAPTCHA with Google
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY
+    if (!recaptchaSecretKey) {
+      console.error('RECAPTCHA_SECRET_KEY is not configured')
+      return NextResponse.json(
+        { error: 'reCAPTCHA is not configured on the server' },
+        { status: 500 }
+      )
+    }
+
+    const recaptchaVerification = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `secret=${recaptchaSecretKey}&response=${recaptchaToken}`,
+      }
+    )
+
+    const recaptchaData = await recaptchaVerification.json()
+
+    if (!recaptchaData.success) {
+      console.error('reCAPTCHA verification failed:', recaptchaData)
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification failed. Please try again.' },
         { status: 400 }
       )
     }
@@ -40,7 +79,7 @@ export async function POST(request: NextRequest) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'Dope Digital Contact Form <onboarding@resend.dev>', // Update this with your verified domain
-      to: ['macoovae@gmail.com'],
+      to: ['dopedigitalstudio@gmail.com'],
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
