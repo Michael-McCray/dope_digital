@@ -13,7 +13,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="flex justify-center items-center mb-6 animate-fade-in">
-          <img src="/logo.png" alt="Logo" className="h-[auto] w-[30vw]" />
+          <img src="/logo.png" alt="Logo" className="h-[auto] w-[30vw] min-w-[300px]" />
         </div>
         <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto">
           Premium Development Services
