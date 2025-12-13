@@ -63,7 +63,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#services"
+                  href="/#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Web Development
@@ -71,7 +71,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#services"
+                  href="/#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Mobile Apps
@@ -79,7 +79,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#services"
+                  href="/#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Cloud Solutions
@@ -87,7 +87,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#services"
+                  href="/#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   UI/UX Design
@@ -101,7 +101,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#about"
+                  href="/#about"
                   className="hover:text-primary-400 transition-colors"
                 >
                   About Us
@@ -109,7 +109,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#contact"
+                  href="/#contact"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Contact
