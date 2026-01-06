@@ -46,3 +46,5 @@ For social media sharing, create an Open Graph image:
 - Place at: `/public/og-image.png`
 - This will be used when sharing your site on Facebook, Twitter, LinkedIn, etc.
 
+
+
