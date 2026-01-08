@@ -1,9 +1,46 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
 export default function Services() {
+  const [selectedService, setSelectedService] = useState<number | null>(null)
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedService(null)
+      }
+    }
+
+    if (selectedService !== null) {
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedService])
+
   const services = [
     {
       title: 'Web Development',
       description:
         'Modern, responsive web applications built with the latest technologies and best practices.',
+      expandedDescription: `We specialize in building cutting-edge web applications that are fast, scalable, and user-friendly. Our web development services include:
+
+• Custom web application development using modern frameworks like React, Next.js, and Vue.js
+• Responsive design that works seamlessly across all devices and screen sizes
+• Performance optimization for lightning-fast load times
+• API development and integration
+• Content Management Systems (CMS) customization
+• Progressive Web Apps (PWA) for app-like experiences
+• E-commerce platform development and customization
+• Third-party integrations and API connections
+
+We follow industry best practices and ensure your web application is secure, maintainable, and ready to scale with your business growth.`,
       icon: (
         <svg
           className="w-12 h-12"
@@ -24,6 +61,19 @@ export default function Services() {
       title: 'Mobile Apps',
       description:
         'Native and cross-platform mobile applications for iOS and Android that deliver exceptional user experiences.',
+      expandedDescription: `Transform your business with powerful mobile applications that engage users and drive results. Our mobile app development services cover:
+
+• Native iOS development using Swift and SwiftUI
+• Native Android development using Kotlin and Jetpack Compose
+• Cross-platform development with React Native and Flutter
+• App design and user experience optimization
+• App Store and Google Play Store submission and optimization
+• Push notification implementation
+• In-app purchases and monetization strategies
+• Integration with backend services and APIs
+• App maintenance and updates
+
+Whether you need a native app for maximum performance or a cross-platform solution for faster deployment, we deliver mobile experiences that users love.`,
       icon: (
         <svg
           className="w-12 h-12"
@@ -44,6 +94,19 @@ export default function Services() {
       title: 'Cloud Solutions',
       description:
         'Scalable cloud infrastructure and deployment solutions to power your applications.',
+      expandedDescription: `Leverage the power of cloud computing to scale your business efficiently. Our cloud solutions include:
+
+• Cloud infrastructure setup and migration (AWS, Azure, Google Cloud)
+• Serverless architecture implementation
+• Container orchestration with Docker and Kubernetes
+• CI/CD pipeline setup for automated deployments
+• Database optimization and cloud database solutions
+• Cloud security and compliance implementation
+• Auto-scaling and load balancing configuration
+• Cloud cost optimization and monitoring
+• Disaster recovery and backup solutions
+
+We help you build robust, scalable infrastructure that grows with your business while optimizing costs and ensuring high availability.`,
       icon: (
         <svg
           className="w-12 h-12"
@@ -64,6 +127,20 @@ export default function Services() {
       title: 'UI/UX Design',
       description:
         'Beautiful, intuitive interfaces designed with user experience at the forefront.',
+      expandedDescription: `Create delightful user experiences that convert visitors into customers. Our UI/UX design services include:
+
+• User research and persona development
+• Information architecture and user flow design
+• Wireframing and prototyping
+• Visual design and brand identity integration
+• Responsive design for all devices
+• Accessibility compliance (WCAG guidelines)
+• Usability testing and optimization
+• Design system creation and documentation
+• Interactive prototypes and animations
+• Design-to-development handoff
+
+We combine aesthetic appeal with functional design to create interfaces that are not only beautiful but also intuitive and conversion-focused.`,
       icon: (
         <svg
           className="w-12 h-12"
@@ -84,6 +161,21 @@ export default function Services() {
       title: 'E-Commerce',
       description:
         'Complete e-commerce solutions that drive sales and provide seamless shopping experiences.',
+      expandedDescription: `Build a powerful online store that drives sales and provides exceptional shopping experiences. Our e-commerce services include:
+
+• Custom e-commerce platform development
+• Shopify, WooCommerce, and Magento customization
+• Shopping cart and checkout optimization
+• Payment gateway integration (Stripe, PayPal, etc.)
+• Inventory management systems
+• Product catalog management
+• Order processing and fulfillment automation
+• Customer account management
+• Multi-currency and multi-language support
+• SEO optimization for product pages
+• Analytics and conversion tracking setup
+
+From small online stores to enterprise-level marketplaces, we create e-commerce solutions that maximize your revenue and provide seamless shopping experiences.`,
       icon: (
         <svg
           className="w-12 h-12"
@@ -104,6 +196,20 @@ export default function Services() {
       title: 'Consulting',
       description:
         'Expert guidance on technology strategy, architecture, and digital transformation.',
+      expandedDescription: `Get expert guidance to make informed technology decisions and accelerate your digital transformation. Our consulting services include:
+
+• Technology strategy and roadmap development
+• Architecture review and optimization
+• Code review and quality assessment
+• Performance optimization consulting
+• Security audit and recommendations
+• Technology stack selection and evaluation
+• Digital transformation planning
+• Team training and knowledge transfer
+• Project management and agile coaching
+• Technical due diligence for acquisitions
+
+Whether you're starting a new project or optimizing existing systems, our consulting services help you make the right technology choices and avoid costly mistakes.`,
       icon: (
         <svg
           className="w-12 h-12"
@@ -141,19 +247,106 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="p-8 bg-gradient-to-br from-primary-50 to-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary-100"
+              onClick={() => setSelectedService(index)}
+              className="p-8 bg-gradient-to-br from-primary-50 to-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary-100 cursor-pointer"
             >
               <div className="text-primary-600 mb-4">{service.icon}</div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">
                 {service.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed mb-4">
                 {service.description}
               </p>
+              <button className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                Learn more
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedService !== null && (
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto"
+          onClick={() => setSelectedService(null)}
+        >
+          {/* Backdrop */}
+          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
+
+          {/* Modal */}
+          <div className="flex min-h-full items-center justify-center p-4">
+            <div
+              className="relative bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedService(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+                aria-label="Close modal"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              {/* Modal content */}
+              <div className="p-8">
+                <div className="text-primary-600 mb-4">
+                  {services[selectedService].icon}
+                </div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  {services[selectedService].title}
+                </h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+                    {services[selectedService].expandedDescription}
+                  </p>
+                </div>
+                <div className="mt-8 flex gap-4">
+                  <a
+                    href="#contact"
+                    onClick={() => setSelectedService(null)}
+                    className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+                  >
+                    Get Started
+                  </a>
+                  <button
+                    onClick={() => setSelectedService(null)}
+                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
