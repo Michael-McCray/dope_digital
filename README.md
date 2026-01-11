@@ -7,10 +7,9 @@ A modern, professional business website for Dope Digital, built with Next.js 14,
 - **Modern Design**: Clean, professional UI with smooth animations
 - **Responsive**: Fully responsive design that works on all devices
 - **Fast Performance**: Built with Next.js for optimal performance
-- **SEO Optimized**: Comprehensive meta tags, Open Graph, Twitter Cards, sitemap, and robots.txt
+- **SEO Optimized**: Proper meta tags and semantic HTML
 - **TypeScript**: Full type safety throughout the codebase
 - **Tailwind CSS**: Utility-first CSS framework for rapid styling
-- **Contact Form**: Working contact form with email functionality
 
 ## 📋 Prerequisites
 
@@ -114,59 +113,6 @@ The contact form uses Resend to send emails. You need to set up a Resend API key
    - To: `from: 'Dope Digital Contact Form <noreply@yourdomain.com>'`
 
 **Note:** All contact form submissions will be sent to `macoovae@gmail.com` (configured in the API route).
-
-#### Google reCAPTCHA Setup (Required for Contact Form)
-
-The contact form uses Google reCAPTCHA v2 to prevent spam. You need to set up reCAPTCHA keys:
-
-1. **Get reCAPTCHA Keys:**
-   - Go to [Google reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin/create)
-   - Click "Create" to register a new site
-   - Choose **reCAPTCHA v2** → **"I'm not a robot" Checkbox**
-   - Add your domain (e.g., `yourdomain.com` and `localhost` for development)
-   - Accept the terms and submit
-   - You'll receive two keys:
-     - **Site Key** (public, used in frontend)
-     - **Secret Key** (private, used in backend)
-
-2. **Set up environment variables:**
-
-   **For local development:**
-   - Add to `.env.local`:
-   ```
-   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_site_key_here
-   RECAPTCHA_SECRET_KEY=your_secret_key_here
-   ```
-
-   **For Vercel deployment:**
-   - Go to your project settings in Vercel
-   - Navigate to Environment Variables
-   - Add both:
-     - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` with your site key
-     - `RECAPTCHA_SECRET_KEY` with your secret key
-   - Redeploy your application
-
-**Note:** Make sure to add `localhost` to your reCAPTCHA allowed domains for local testing.
-
-#### SEO Configuration
-
-For optimal SEO, set up the following environment variables:
-
-1. **Site URL (Required for SEO):**
-   ```
-   NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-   ```
-
-2. **Google Site Verification (Optional):**
-   - Get your verification code from [Google Search Console](https://search.google.com/search-console)
-   - Add to `.env.local`:
-   ```
-   GOOGLE_SITE_VERIFICATION=your_verification_code
-   ```
-
-3. **Favicon Setup:**
-   - See `FAVICON_GUIDE.md` for instructions on generating favicon files
-   - A basic SVG favicon is already included at `/public/favicon.svg`
 
 ### Customization
 

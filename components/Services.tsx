@@ -1,28 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<number | null>(null)
-
-  // Close modal on Escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedService(null)
-      }
-    }
-
-    if (selectedService !== null) {
-      document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [selectedService])
 
   const services = [
     {
@@ -228,36 +210,82 @@ Whether you're starting a new project or optimizing existing systems, our consul
     },
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  }
+
   return (
-    <section
-      id="services"
-      className="py-20 bg-white"
-    >
+    <section id="services" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Our Services
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Comprehensive development solutions tailored to your business needs
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
               onClick={() => setSelectedService(index)}
-              className="p-8 bg-gradient-to-br from-primary-50 to-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-primary-100 cursor-pointer"
+              className="p-8 bg-gradient-to-br from-primary-50 to-white rounded-xl shadow-lg border border-primary-100 cursor-pointer group"
             >
-              <div className="text-primary-600 mb-4">{service.icon}</div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <motion.div
+                className="text-primary-600 mb-4"
+                whileHover={{ scale: 1.1, rotate: 3 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
+                {service.icon}
+              </motion.div>
+              <motion.h3
+                className="text-2xl font-semibold text-gray-900 mb-3"
+                whileHover={{ color: '#0ea5e9' }}
+              >
                 {service.title}
-              </h3>
+              </motion.h3>
               <p className="text-gray-600 leading-relaxed mb-4">
                 {service.description}
               </p>
-              <button className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+              <motion.button
+                className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center"
+                whileHover={{ x: 5 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
                 Learn more
                 <svg
                   className="w-4 h-4 ml-1"
@@ -272,39 +300,38 @@ Whether you're starting a new project or optimizing existing systems, our consul
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Modal */}
       {selectedService !== null && (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 overflow-y-auto"
           onClick={() => setSelectedService(null)}
         >
-          {/* Backdrop */}
-          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
-
-          {/* Modal */}
+          <div className="fixed inset-0 bg-black bg-opacity-50"></div>
           <div className="flex min-h-full items-center justify-center p-4">
-            <div
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="relative bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              {/* Close button */}
-              <button
+              <motion.button
                 onClick={() => setSelectedService(null)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
-                aria-label="Close modal"
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10"
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -312,9 +339,8 @@ Whether you're starting a new project or optimizing existing systems, our consul
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
-              </button>
+              </motion.button>
 
-              {/* Modal content */}
               <div className="p-8">
                 <div className="text-primary-600 mb-4">
                   {services[selectedService].icon}
@@ -328,26 +354,29 @@ Whether you're starting a new project or optimizing existing systems, our consul
                   </p>
                 </div>
                 <div className="mt-8 flex gap-4">
-                  <a
+                  <motion.a
                     href="#contact"
                     onClick={() => setSelectedService(null)}
-                    className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+                    className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-600"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Get Started
-                  </a>
-                  <button
+                  </motion.a>
+                  <motion.button
                     onClick={() => setSelectedService(null)}
-                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                    className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Close
-                  </button>
+                  </motion.button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       )}
     </section>
   )
 }
-

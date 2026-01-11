@@ -14,7 +14,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all transform hover:scale-110 hover:-translate-y-1"
                 aria-label="Twitter"
               >
                 <svg
@@ -27,7 +27,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all transform hover:scale-110 hover:-translate-y-1"
                 aria-label="GitHub"
               >
                 <svg
@@ -44,7 +44,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all transform hover:scale-110 hover:-translate-y-1"
                 aria-label="LinkedIn"
               >
                 <svg
@@ -63,15 +63,15 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/#services"
-                  className="hover:text-primary-400 transition-colors"
+                  href="#services"
+                  className="hover:text-primary-400 transition-all transform hover:translate-x-1 inline-block"
                 >
                   Web Development
                 </a>
               </li>
               <li>
                 <a
-                  href="/#services"
+                  href="#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Mobile Apps
@@ -79,7 +79,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/#services"
+                  href="#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Cloud Solutions
@@ -87,7 +87,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/#services"
+                  href="#services"
                   className="hover:text-primary-400 transition-colors"
                 >
                   UI/UX Design
@@ -101,7 +101,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/#about"
+                  href="#about"
                   className="hover:text-primary-400 transition-colors"
                 >
                   About Us
@@ -109,19 +109,19 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/#contact"
+                  href="#contact"
                   className="hover:text-primary-400 transition-colors"
                 >
                   Contact
                 </a>
               </li>
               <li>
-                <a href="/privacy" className="hover:text-primary-400 transition-colors">
+                <a href="#" className="hover:text-primary-400 transition-colors">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="/terms" className="hover:text-primary-400 transition-colors">
+                <a href="#" className="hover:text-primary-400 transition-colors">
                   Terms of Service
                 </a>
               </li>
