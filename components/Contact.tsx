@@ -130,7 +130,7 @@ export default function Contact() {
             >
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-black mb-2"
               >
                 Name
               </label>
@@ -141,7 +141,7 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
                 placeholder="Your name"
                 whileFocus={{ scale: 1.02, borderColor: '#0ea5e9' }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -168,7 +168,7 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
                 placeholder="your.email@example.com"
                 whileFocus={{ scale: 1.02, borderColor: '#0ea5e9' }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -195,7 +195,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none resize-none"
+                className="w-full px-4 py-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none resize-none"
                 placeholder="Tell us about your project..."
                 whileFocus={{ scale: 1.02, borderColor: '#0ea5e9' }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
