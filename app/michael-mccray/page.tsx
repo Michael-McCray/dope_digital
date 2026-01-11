@@ -6,7 +6,7 @@ export default function MichaelMcCrayPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#205495]">
     
-      <img src="/card6.png" alt="Michael McCray" className="max-w-[90vw] w-[500px] mx-auto" />
+      <img src="/card7.png" alt="Michael McCray" className="max-w-[90vw] w-[500px] mx-auto" />
     </div>
   )
 }
