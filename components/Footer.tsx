@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const services = ['Web Development', 'Mobile Apps', 'Cloud Solutions', 'UI/UX Design']
@@ -25,7 +26,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <img src="/logo.png" alt="Dope Digital" className="h-auto w-[140px] mb-4 opacity-90" />
+            <Image src="/logo.png" alt="Dope Digital" width={140} height={44} className="h-auto w-[140px] mb-4 opacity-90" />
             <p className="mb-6 max-w-sm text-sm leading-relaxed">
               Premium development services for modern businesses. We craft
               exceptional digital experiences that drive results.

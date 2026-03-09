@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -44,7 +45,7 @@ export default function Navbar() {
             className="flex-shrink-0"
           >
             <a href="#home">
-              <img src="/logo.png" alt="Logo" className="h-auto w-[130px]" />
+              <Image src="/logo.png" alt="Dope Digital" width={130} height={40} className="h-auto w-[130px]" />
             </a>
           </motion.div>
 

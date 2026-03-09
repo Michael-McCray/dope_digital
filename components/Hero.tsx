@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 const techPills = ['React', 'Next.js', 'TypeScript', 'Node.js', 'AWS', 'Flutter']
@@ -64,13 +65,19 @@ export default function Hero() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="flex justify-center items-center mb-8"
         >
-          <motion.img
-            src="/logo.png"
-            alt="Dope Digital"
-            className="h-auto w-[28vw] min-w-[260px] max-w-[400px] drop-shadow-2xl"
+          <motion.div
             whileHover={{ scale: 1.04 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          />
+          >
+            <Image
+              src="/logo.png"
+              alt="Dope Digital"
+              width={400}
+              height={120}
+              priority
+              className="h-auto w-[28vw] min-w-[260px] max-w-[400px] drop-shadow-2xl"
+            />
+          </motion.div>
         </motion.div>
 
         {/* Animated tagline */}
@@ -143,7 +150,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 + i * 0.08, ease: 'easeOut' }}
-              className="px-3 py-1 text-xs font-medium text-gray-400 border border-gray-800 rounded-full bg-white/5 backdrop-blur-sm"
+              className="px-3 py-1 text-xs font-medium text-gray-300 border border-gray-700 rounded-full bg-white/8 backdrop-blur-sm"
             >
               {tech}
             </motion.span>

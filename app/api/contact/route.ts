@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { isEnvConfigured, requireEnv } from '@/lib/env'
 
-const resend = process.env.RESEND_API_KEY
+const resend = isEnvConfigured('RESEND_API_KEY')
   ? new Resend(process.env.RESEND_API_KEY)
   : null
 
@@ -50,14 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify reCAPTCHA
-    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY
-    if (!recaptchaSecretKey) {
-      console.error('RECAPTCHA_SECRET_KEY is not configured')
-      return NextResponse.json(
-        { error: 'reCAPTCHA is not configured on the server.' },
-        { status: 500 }
-      )
-    }
+    const recaptchaSecretKey = requireEnv('RECAPTCHA_SECRET_KEY')
 
     const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
       method: 'POST',
