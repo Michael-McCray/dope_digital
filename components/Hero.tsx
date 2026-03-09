@@ -1,14 +1,23 @@
 'use client'
 
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+
+const techPills = ['React', 'Next.js', 'TypeScript', 'Node.js', 'AWS', 'Flutter']
 
 export default function Hero() {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+  const mouseX = useMotionValue(0.5)
+  const mouseY = useMotionValue(0.5)
 
-  const springConfig = { damping: 25, stiffness: 700 }
+  const springConfig = { damping: 30, stiffness: 150 }
   const x = useSpring(mouseX, springConfig)
   const y = useSpring(mouseY, springConfig)
+
+  const blob1X = useTransform(x, [0, 1], [-40, 40])
+  const blob1Y = useTransform(y, [0, 1], [-40, 40])
+  const blob2X = useTransform(x, [0, 1], [40, -40])
+  const blob2Y = useTransform(y, [0, 1], [40, -40])
+  const blob3X = useTransform(x, [0, 1], [-20, 20])
+  const blob3Y = useTransform(y, [0, 1], [-20, 20])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -19,136 +28,138 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-primary-50 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Background decoration with Framer Motion */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.04)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
+
+      {/* Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -50, 20, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          style={{
-            x: x.get() * 20,
-            y: y.get() * 20,
-          }}
+          className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-primary-600 rounded-full filter blur-[130px] opacity-20"
+          style={{ x: blob1X, y: blob1Y }}
+          animate={{ scale: [1, 1.12, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-70"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 50, -20, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 2,
-          }}
-          style={{
-            x: x.get() * -20,
-            y: y.get() * -20,
-          }}
+          className="absolute -bottom-32 -left-32 w-[600px] h-[600px] bg-violet-600 rounded-full filter blur-[130px] opacity-15"
+          style={{ x: blob2X, y: blob2Y }}
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 w-80 h-80 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-70"
-          animate={{
-            x: [0, 20, -15, 0],
-            y: [0, -30, 15, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 4,
-          }}
-          style={{
-            x: x.get() * 10 - 160,
-            y: y.get() * 10 - 160,
-          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-cyan-500 rounded-full filter blur-[120px] opacity-10"
+          style={{ x: blob3X, y: blob3Y }}
+          animate={{ scale: [1, 1.08, 0.94, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
         />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Logo */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: 0.9, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="flex justify-center items-center mb-6"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="flex justify-center items-center mb-8"
         >
           <motion.img
             src="/logo.png"
-            alt="Logo"
-            className="h-[auto] w-[30vw] min-w-[300px] drop-shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            alt="Dope Digital"
+            className="h-auto w-[28vw] min-w-[260px] max-w-[400px] drop-shadow-2xl"
+            whileHover={{ scale: 1.04 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           />
         </motion.div>
 
+        {/* Animated tagline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto"
+          className="text-xl md:text-2xl font-semibold mb-4 bg-gradient-to-r from-primary-400 via-cyan-300 to-primary-400 bg-clip-text text-transparent animate-shimmer"
         >
           Premium Development Services
         </motion.p>
 
+        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-          className="text-lg md:text-xl text-gray-500 mb-8 max-w-2xl mx-auto"
+          transition={{ duration: 0.8, delay: 0.35, ease: 'easeOut' }}
+          className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
         >
           We craft exceptional digital experiences through cutting-edge web
           applications, mobile apps, and innovative software solutions.
         </motion.p>
 
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-14"
         >
           <motion.a
             href="#contact"
-            className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-600 shadow-lg"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold rounded-xl text-white bg-gradient-to-r from-primary-600 to-primary-500"
+            whileHover={{
+              scale: 1.05,
+              y: -2,
+              boxShadow: '0 20px 40px -12px rgba(2,132,199,0.55)',
+            }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
           >
-            Get Started
+            Get Quote
           </motion.a>
           <motion.a
             href="#services"
-            className="inline-flex items-center justify-center px-8 py-3 border-2 border-primary-600 text-base font-medium rounded-lg text-primary-600 bg-white"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            className="inline-flex items-center justify-center px-8 py-3.5 border border-gray-700 text-base font-semibold rounded-xl text-gray-300 bg-white/5 backdrop-blur-sm"
+            whileHover={{
+              scale: 1.05,
+              y: -2,
+              borderColor: 'rgba(14,165,233,0.6)',
+              color: '#fff',
+            }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
           >
             Our Services
           </motion.a>
+        </motion.div>
+
+        {/* Tech pills */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.75 }}
+          className="flex flex-wrap justify-center gap-2"
+        >
+          {techPills.map((tech, i) => (
+            <motion.span
+              key={tech}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 + i * 0.08, ease: 'easeOut' }}
+              className="px-3 py-1 text-xs font-medium text-gray-400 border border-gray-800 rounded-full bg-white/5 backdrop-blur-sm"
+            >
+              {tech}
+            </motion.span>
+          ))}
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
+        <span className="text-[10px] tracking-[0.2em] text-gray-600 uppercase">Scroll</span>
         <svg
-          className="w-6 h-6 text-primary-600"
+          className="w-4 h-4 text-gray-600"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -156,7 +167,7 @@ export default function Hero() {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </motion.div>
     </section>
