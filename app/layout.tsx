@@ -4,7 +4,7 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const siteUrl = 'https://dopedigitalstudio.com'
+const siteUrl = 'https://www.dopedigital.dev'
 const siteTitle = 'Dope Digital – Premium Development Services'
 const siteDescription =
   'We craft exceptional digital experiences through cutting-edge web applications, mobile apps, and innovative software solutions.'
