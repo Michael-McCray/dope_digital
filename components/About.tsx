@@ -59,10 +59,10 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: text + stats */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <span className="inline-block px-3 py-1 text-xs font-semibold tracking-widest text-primary-600 uppercase bg-primary-50 rounded-full mb-4">
               Who We Are
@@ -97,15 +97,15 @@ export default function About() {
                 <motion.div
                   key={index}
                   variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+                    hidden: { opacity: 0 },
+                    visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
                   }}
                   className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm"
                 >
                   <motion.div
                     className="text-3xl font-extrabold text-primary-600 mb-1"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ type: 'spring', stiffness: 200, damping: 15, delay: index * 0.1 }}
                   >
@@ -123,10 +123,10 @@ export default function About() {
 
           {/* Right: code editor visual */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
             className="relative"
           >
             {/* Glow */}

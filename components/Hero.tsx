@@ -159,14 +159,17 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+      <motion.a
+        href="#services"
+        className="absolute bottom-8 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        whileHover={{ opacity: 0.7 }}
+        aria-label="Scroll to services"
       >
-        <span className="text-[10px] tracking-[0.2em] text-gray-600 uppercase">Scroll</span>
+        <span className="text-[10px] tracking-[0.2em] text-gray-500 uppercase">Scroll</span>
         <svg
-          className="w-4 h-4 text-gray-600"
+          className="w-4 h-4 text-gray-500"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -176,7 +179,7 @@ export default function Hero() {
         >
           <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
-      </motion.div>
+      </motion.a>
     </section>
   )
 }
